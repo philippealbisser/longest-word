@@ -1,5 +1,6 @@
 import string
 import random
+import requests
 
 class Game:
 
@@ -28,4 +29,19 @@ class Game:
         else:
             result = False
 
+        # Check if the word is correct
+        response = requests.get(f"https://wagon-dictionary.herokuapp.com/{word}")
+        json_response = response.json()
+        #print(str(json_response))
+        if json_response['found'] == False:
+            result = False
+            #print("not a correct word: "+word)
+
         return result
+
+
+
+"""
+https://wagon-dictionary.herokuapp.com/
+{"message":"welcome","endpoints":["https://wagon-dictionary.herokuapp.com/:word","https://wagon-dictionary.herokuapp.com/autocomplete/:stem"],"total_api_hits":3671216,"words_found":2044038,"autocomplete_hits":863815}
+"""
