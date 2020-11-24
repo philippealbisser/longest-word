@@ -14,8 +14,8 @@ class TestGame(unittest.TestCase):
 
     def test_is_valid(self):
             new_game = Game()
-            new_game.grid = list('ABCDEFGHI')
-            self.assertIs(new_game.is_valid('CAFE'), True)
+            new_game.grid = list('ABCDETECU')
+            self.assertIs(new_game.is_valid('CUTE'), True)
 
     def test_is_not_valid(self):
         new_game = Game()
@@ -26,3 +26,13 @@ class TestGame(unittest.TestCase):
         new_game = Game()
         new_game.grid = list('ABCDEFGHI')
         self.assertIs(new_game.is_valid('CACA'), False)
+
+    def test_unknown_word_is_invalid(self):
+          new_game = Game()
+          new_game.grid = list('KWIENFUQW')
+          self.assertIs(new_game.is_valid('FEUN'), False)
+
+    def test_dict_word_is_valid(self):
+          new_game = Game()
+          new_game.grid = list('KWIENFUQW')
+          self.assertIs(new_game.is_valid('FUN'), True)
